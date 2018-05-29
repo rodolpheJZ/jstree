@@ -309,6 +309,8 @@
 									laster = {};
 									o = true;
 									return false;
+								} else { // RJZ BugFix 1.1.2017: change icon if check callback returns false
+									data.helper.find('.jstree-icon').first().removeClass('jstree-ok').addClass('jstree-er');
 								}
 							});
 							if(o === true) { return; }
@@ -317,7 +319,8 @@
 				}
 				$('.jstree-dnd-parent').removeClass('jstree-dnd-parent');
 				lastmv = false;
-				data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
+                                // RJZ BugFix 1.1.2017: needs to be commented out, otherwise it keeps overriding the 'dnd_move.vakata' function for dnd outside jstree
+//				data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
 				if (data.event.originalEvent && data.event.originalEvent.dataTransfer) {
 					data.event.originalEvent.dataTransfer.dropEffect = 'none';
 				}

@@ -13,7 +13,7 @@
 }(function ($, undefined) {
 	"use strict";
 /*!
- * jsTree 3.3.5
+ * jsTree {{VERSION}}
  * http://jstree.com/
  *
  * Copyright (c) 2014 Ivan Bozhanov (http://vakata.com)
@@ -54,7 +54,7 @@
 		 * specifies the jstree version in use
 		 * @name $.jstree.version
 		 */
-		version : '3.3.5',
+		version : '{{VERSION}}',
 		/**
 		 * holds all the default options used when creating new instances
 		 * @name $.jstree.defaults
@@ -430,7 +430,7 @@
 		 */
 		force_text : false,
 		/**
-		 * Should the node should be toggled if the text is double clicked . Defaults to `true`
+		 * Should the node be toggled if the text is double clicked. Defaults to `true`
 		 * @name $.jstree.defaults.core.dblclick_toggle
 		 */
 		dblclick_toggle : true,
@@ -1331,7 +1331,7 @@
 			return true;
 		},
 		/**
-		 * load an array of nodes (will also load unavailable nodes as soon as the appear in the structure). Used internally.
+		 * load an array of nodes (will also load unavailable nodes as soon as they appear in the structure). Used internally.
 		 * @private
 		 * @name _load_nodes(nodes [, callback])
 		 * @param  {array} nodes
@@ -2608,7 +2608,7 @@
 			return node;
 		},
 		/**
-		 * opens a node, revaling its children. If the node is not loaded it will be loaded and opened once ready.
+		 * opens a node, revealing its children. If the node is not loaded it will be loaded and opened once ready.
 		 * @name open_node(obj [, callback, animation])
 		 * @param {mixed} obj the node to open
 		 * @param {Function} callback a function to execute once the node is opened
@@ -2812,7 +2812,7 @@
 			}
 		},
 		/**
-		 * opens all nodes within a node (or the tree), revaling their children. If the node is not loaded it will be loaded and opened once ready.
+		 * opens all nodes within a node (or the tree), revealing their children. If the node is not loaded it will be loaded and opened once ready.
 		 * @name open_all([obj, animation, original_obj])
 		 * @param {mixed} obj the node to open recursively, omit to open all nodes in the tree
 		 * @param {Number} animation the animation duration in milliseconds when opening the nodes, the default is no animation
@@ -2853,7 +2853,7 @@
 			}
 		},
 		/**
-		 * closes all nodes within a node (or the tree), revaling their children
+		 * closes all nodes within a node (or the tree), revealing their children
 		 * @name close_all([obj, animation])
 		 * @param {mixed} obj the node to close recursively, omit to close all nodes in the tree
 		 * @param {Number} animation the animation duration in milliseconds when closing the nodes, the default is no animation
@@ -6896,6 +6896,8 @@
 									laster = {};
 									o = true;
 									return false;
+								} else { // RJZ BugFix 1.1.2017: change icon if check callback returns false
+									data.helper.find('.jstree-icon').first().removeClass('jstree-ok').addClass('jstree-er');
 								}
 							});
 							if(o === true) { return; }
@@ -6904,7 +6906,8 @@
 				}
 				$('.jstree-dnd-parent').removeClass('jstree-dnd-parent');
 				lastmv = false;
-				data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
+                                // RJZ BugFix 1.1.2017: needs to be commented out, otherwise it keeps overriding the 'dnd_move.vakata' function for dnd outside jstree
+//				data.helper.find('.jstree-icon').removeClass('jstree-ok').addClass('jstree-er');
 				if (data.event.originalEvent && data.event.originalEvent.dataTransfer) {
 					data.event.originalEvent.dataTransfer.dropEffect = 'none';
 				}
